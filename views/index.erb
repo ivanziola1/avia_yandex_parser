@@ -1,0 +1,43 @@
+<form method="GET" action="/results">
+  <p>
+    Из<br>
+    <input type="text" name="from_name" id="from" required="true" autofocus="true">
+  </p>
+  <p>
+    В<br>
+    <input type="text" name="to_name" id="to" required="true">
+  </p>
+  <p>
+    <label><input type="radio" id="oneway_true" name="oneway" value="1" checked="checked"/>Туда</label>
+    <label><input type="radio" id="oneway_false" name="oneway" value="2"/>Туда-обратно</label>
+  </p>
+
+  <p>
+    Туда (формат: 1 янв)<br>
+    <input type="text" name="when" id="when">
+  </p>
+
+  <p id="return_date_input">
+    Обратно<br>
+    <input type="text" class="date" name="return_date" id="return_date">
+  </p>
+  <p>
+    Взрослые<br>
+    <input type="number" min="1" max="9" name="adult_seats" value="1"/>
+  </p>
+  <p>
+    Дети (до 12 лет)<br>
+    <input type="number" min="0" max="9" name="children_seats" value="0"/>
+  </p>
+  <p>
+    Младенцы (до 2 лет)<br>
+    <input type="number" min="0" max="4" name="infant_seats" value="0"/>
+  </p>
+  <p>
+    Класс<br>
+    <label><input type="radio" id="economy" name="klass" value="economy" checked="checked"/>Эконом</label>
+    <label><input type="radio" id="buisiness" name="klass" value="business"/>Бизнес</label>
+  </p>
+  <input name="lang" id="lang" type="hidden" value="ru"/>
+  <input type="submit">
+</form>

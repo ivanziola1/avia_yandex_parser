@@ -1,0 +1,12 @@
+table {
+    width: 100%;
+    border-collapse: collapse;
+}
+
+table, td, th {
+    border: 1px solid black;
+}
+
+#return_date_input {
+  display: none;
+}
