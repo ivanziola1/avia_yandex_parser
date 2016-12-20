@@ -18,7 +18,6 @@ class AviaYandexParser
     load_all_pages(pages)
     set_nokgiri_page
     scrape_data
-    open('/home/vanya/results.html', 'w') { |f| f.puts @browser.html }
     close_browser_and_destroy_headless_session
   end
 
@@ -30,7 +29,7 @@ class AviaYandexParser
     set_the_number_of_seats
     set_the_oneway_value
     set_the_flight_class
-    #@browser.execute_script("document.getElementsByName('lang')[0].value='#{@params[:lang]}'")
+    @browser.execute_script("document.getElementsByName('lang')[0].value='#{@params[:lang]}'")
   end
 
   def submit_search_and_wait_for_results
@@ -44,7 +43,7 @@ class AviaYandexParser
         @browser.execute_script('window.scrollTo(0,document.body.scrollHeight)')
         @browser.div(class: 'flights-list_kb__page-separator').wait_until_present
       end
-  end
+    end
   end
 
   def close_browser_and_destroy_headless_session
