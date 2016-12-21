@@ -58,21 +58,28 @@ class AviaYandexParser
   def scrape_data
     deals = @nokogiri_page.css('.flight_list')
     deals.each do |deal|
-      @results << get_data_from_deal(deal)
+      forward = deal.at_css('.flight_list__forward')
+      backward = deal.at_css('.flight_list__backward')
+      @results << if forward && backward
+                    { forward: get_data_from_deal(forward), backward: get_data_from_deal(backward) }
+                  else
+                    { forward: get_data_from_deal(deal) }
+                end
     end
   end
 
-  def parse_deals(deals)
-  end
-
   def get_data_from_deal(deal)
+    tags = []
+    companies_list = []
+    price = ''
+    href = ''
     departure_time = deal.at_css('.flight_list__departure-time').text.strip
     arrival_time = deal.at_css('.flight_list__arrival-time').text
     flight_duration = deal.at_css('.flight_list__flight-duration').text.strip
-    price = deal.at_css('.price_kb').text.strip
-    tags = []
-    companies_list = []
-    deal.css('.type-of-ticket_kb__type').each { |type| tags << type.text }
+    buy_info = deal.at_css('.flight_list__buy')
+    price = deal.at_css('.price_kb').text.strip if buy_info
+    href = deal.at_css('.y-button_islet-kb-serp')['href'] if buy_info
+    deal.css('.type-of-ticket_kb__type').each { |type| tags << type.text } if buy_info
     deal.css('.flight_list__company-names').each { |company| companies_list << company.text }
     flight_details = { transfers: [] }
     flight_details[:airports] = deal.css('.flight_list__airports').text
@@ -85,13 +92,13 @@ class AviaYandexParser
         transfer_place = if dayly_transfer
                            dayly_transfer.text
                          else
-                           'night'
+                           el.at('.flight_list__nightly-transfer').text
                          end
         flight_details[:transfers] << { place: transfer_place, transfer_duration: el.at('.flight_list__transfer-duration').text }
       end
     end
     Deal.new(companies_list, tags, departure_time, flight_duration,
-             arrival_time, flight_details, price)
+             arrival_time, flight_details, price, href)
   end
 
   def set_departure_and_arrival_locations

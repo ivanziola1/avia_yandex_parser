@@ -13,25 +13,28 @@
   </p>
 
   <p>
-    Туда (формат: 1 янв)<br>
+    Туда (формат: 29 дек)<br>
     <input type="text" name="when" id="when">
   </p>
 
   <p id="return_date_input">
-    Обратно<br>
+    Обратно (формат: 1 янв)<br>
     <input type="text" class="date" name="return_date" id="return_date">
   </p>
+  Пассажиры<br>
   <p>
-    Взрослые<br>
-    <input type="number" min="1" max="9" name="adult_seats" value="1"/>
-  </p>
-  <p>
-    Дети (до 12 лет)<br>
-    <input type="number" min="0" max="9" name="children_seats" value="0"/>
-  </p>
-  <p>
-    Младенцы (до 2 лет)<br>
-    <input type="number" min="0" max="4" name="infant_seats" value="0"/>
+    <p>
+      Взрослые<br>
+      <input type="number" min="1" max="9" name="adult_seats" value="1"/>
+    </p>
+    <p>
+      Дети (до 12 лет)<br>
+      <input type="number" min="0" max="8" name="children_seats" id="children_seats" value="0"/>
+    </p>
+    <p>
+      Младенцы (до 2 лет, по одному на взрослого)<br>
+      <input type="number" min="0" max="4" name="infant_seats" id="infant_seats" value="0"/>
+    </p>
   </p>
   <p>
     Класс<br>

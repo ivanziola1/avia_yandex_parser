@@ -1,0 +1,12 @@
+<td><%= result.companies_list.join(",") %></td>
+<td><%= result.departure_time %></td>
+<td><%= result.flight_duration %></td>
+<td><%= result.arrival_time %></td>
+<td><%= humanized_details(result.flight_details) %></td>
+<td><%= result.price %></td>
+<td><%= result.tags.join(",") %></td>
+<td>
+  <%  unless  result.href.empty? %>
+  <%= full_href(result.href)%>
+  <% end %>
+</td>

@@ -8,18 +8,15 @@
       <th>Детали перелета</th>
       <th>Цена</th>
       <th>Метки</th>
-      <th></th>
+      <th width= '30%'>Cсылка</th>
     </tr>
     <% @results.each do |result| %>
-    <tr>
-      <td><%= result.companies_list.join(",") %></td>
-      <td><%= result.departure_time %></td>
-      <td><%= result.flight_duration %></td>
-      <td><%= result.arrival_time %></td>
-      <td><%= humanized_details(result.flight_details) %></td>
-      <td><%= result.price %></td>
-      <td><%=  result.tags.join(",") %></td>
-      <td>Кноппка</td>
+    <tr class ="<%= 'underline-row' if !result[:backward]%>">
+      <%= partial :flight_info, locals: { result: result[:forward]}  %>
+    </tr>
+    <tr class="underline-row">
+      <%= partial :flight_info, locals: { result: result[:backward]} if  result[:backward] %>
     </tr>
     <% end %>
   </tbody>
+</table>
